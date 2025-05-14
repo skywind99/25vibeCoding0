@@ -1,0 +1,288 @@
+<!-- 주기율표 시뮬레이터: 원소 설명 및 이온 표시 추가 버전 -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>주기율표 시뮬레이터</title>
+  <style>
+    body {
+      margin: 0;
+      background: #1e1e1e;
+      color: white;
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      min-height: 100vh;
+    }
+    .left-panel {
+      flex: 4;
+      display: flex;
+      flex-direction: column;
+      padding: 10px;
+    }
+    .right-panel {
+      flex: 2;
+      padding: 10px;
+      border-left: 2px solid #444;
+      display: flex;
+      flex-direction: column;
+    }
+    h1 {
+      text-align: center;
+      margin: 10px 0;
+    }
+    .canvas {
+      height: 300px;
+      background: #111;
+      border: 2px solid #444;
+      position: relative;
+      margin-bottom: 10px;
+      overflow: hidden;
+    }
+    .formula-box {
+      height: 50px;
+      background: #222;
+      border: 2px solid #444;
+      padding: 8px;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+    .recommendations {
+      background: #222;
+      border: 2px solid #444;
+      padding: 8px;
+      font-size: 14px;
+      flex-grow: 1;
+      overflow-y: auto;
+      margin-bottom: 10px;
+    }
+    .buttons {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .btn {
+      flex: 1;
+      padding: 8px;
+      background: #333;
+      color: white;
+      border: 1px solid #555;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background: #444;
+    }
+    .periodic-container {
+      overflow-y: auto;
+      max-height: calc(100vh - 50px);
+    }
+    .table-wrapper {
+      display: grid;
+      grid-template-columns: repeat(18, 36px);
+      grid-auto-rows: 36px;
+      gap: 3px;
+      justify-content: center;
+      padding: 10px;
+    }
+    .element {
+      border-radius: 4px;
+      text-align: center;
+      font-size: 12px;
+      padding: 2px;
+      cursor: grab;
+      user-select: none;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
+    .element:hover {
+      transform: scale(1.1);
+      z-index: 10;
+    }
+    .element span {
+      display: block;
+      font-size: 7px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .element .atomic-number {
+      position: absolute;
+      top: 1px;
+      left: 2px;
+      font-size: 6px;
+    }
+    .empty {
+      background: transparent;
+      border: none;
+      cursor: default;
+    }
+    .atom {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      cursor: grab;
+      user-select: none;
+      z-index: 10;
+    }
+    .bond {
+      position: absolute;
+      height: 2px;
+      background-color: rgba(255, 255, 255, 0.6);
+      transform-origin: left center;
+      z-index: 5;
+    }
+    .bond-label {
+      position: absolute;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 2px 4px;
+      border-radius: 3px;
+      font-size: 10px;
+      z-index: 6;
+    }
+    .recommendation-item {
+      margin: 5px 0;
+      padding: 5px;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+    .recommendation-item:hover {
+      background: #333;
+    }
+    .element-description {
+      margin-top: 10px;
+      padding: 10px;
+      background: #222;
+      border: 2px solid #444;
+      font-size: 14px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="left-panel">
+    <h1>화학식 시뮬레이터</h1>
+    <div class="canvas" id="canvas"></div>
+    <div class="formula-box" id="formulaBox">화학식을 여기에 보여줍니다</div>
+    <div class="recommendations" id="recommendationsBox">
+      <h3>화합물 추천</h3>
+      <div id="recommendations"></div>
+    </div>
+    <div class="buttons">
+      <button class="btn" id="saveBtn">저장</button>
+      <button class="btn" id="resetBtn">초기화</button>
+    </div>
+  </div>
+  <div class="right-panel">
+    <div class="periodic-container">
+      <div class="table-wrapper" id="periodicTable"></div>
+    </div>
+    <div class="element-description" id="elementDescription">
+      <h3>원소 설명</h3>
+      <p>원소를 클릭하면 설명이 표시됩니다.</p>
+    </div>
+  </div>
+
+  <script>
+    const table = document.getElementById('periodicTable');
+    const canvas = document.getElementById('canvas');
+    const formulaBox = document.getElementById('formulaBox');
+    const recommendationsBox = document.getElementById('recommendations');
+    const saveBtn = document.getElementById('saveBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const descriptionBox = document.getElementById('elementDescription');
+
+    const periodColors = {
+      1: '#ff9ff3', 2: '#feca57', 3: '#ff6b6b', 4: '#1dd1a1',
+      5: '#54a0ff', 6: '#5f27cd', 7: '#576574'
+    };
+
+    const elements = {
+      1: ['H', '수소', 1, 1, '+1', '가장 가벼운 원소이며 우주에서 가장 풍부함.'],
+      2: ['He', '헬륨', 18, 1, '0', '불활성 기체로 반응성이 거의 없음.'],
+      11: ['Na', '나트륨', 1, 3, '+1', '알칼리 금속으로 물과 격렬히 반응함.'],
+      17: ['Cl', '염소', 17, 3, '-1', '살균 작용이 있는 비금속 원소.']
+    };
+
+    for (let period = 1; period <= 7; period++) {
+      for (let group = 1; group <= 18; group++) {
+        const cell = document.createElement('div');
+        const atomicNumber = Object.keys(elements).find(key => {
+          const e = elements[key];
+          return e[2] === group && e[3] === period;
+        });
+        if (atomicNumber) {
+          const [symbol, name, group, period, charge, desc] = elements[atomicNumber];
+          cell.className = 'element';
+          cell.innerHTML = `<div class="atomic-number">${atomicNumber}</div>${symbol}<span>${name}</span>`;
+          cell.style.backgroundColor = periodColors[period];
+          cell.dataset.symbol = symbol;
+          cell.dataset.atomicNumber = atomicNumber;
+          cell.addEventListener('click', () => {
+            descriptionBox.innerHTML = `
+              <h3>${symbol} (${name})</h3>
+              <p><strong>족:</strong> ${group}족<br/>
+              <strong>주기:</strong> ${period}주기<br/>
+              <strong>산화수:</strong> ${charge}<br/>
+              <strong>설명:</strong> ${desc}</p>
+            `;
+          });
+          cell.draggable = true;
+          cell.addEventListener('dragstart', (e) => {
+            e.dataTransfer.setData('text/plain', JSON.stringify({ symbol, name, atomicNumber, color: periodColors[period] }));
+          });
+        } else {
+          cell.className = 'empty';
+        }
+        table.appendChild(cell);
+      }
+    }
+
+    canvas.addEventListener('dragover', e => e.preventDefault());
+    canvas.addEventListener('drop', e => {
+      const json = e.dataTransfer.getData('text/plain');
+      if (!json) return;
+      const data = JSON.parse(json);
+      const [symbol, name, group, period, charge] = elements[data.atomicNumber];
+      const atom = document.createElement('div');
+      atom.className = 'atom';
+      atom.textContent = symbol;
+      atom.style.left = `${e.offsetX - 20}px`;
+      atom.style.top = `${e.offsetY - 20}px`;
+      atom.style.backgroundColor = data.color;
+      atom.dataset.symbol = symbol;
+      const ion = document.createElement('div');
+      ion.style.position = 'absolute';
+      ion.style.bottom = '-10px';
+      ion.style.right = '-2px';
+      ion.style.fontSize = '10px';
+      ion.style.color = 'yellow';
+      if (charge.includes('+')) ion.textContent = '⁺';
+      if (charge.includes('-')) ion.textContent = '⁻';
+      atom.appendChild(ion);
+      canvas.appendChild(atom);
+    });
+
+    resetBtn.addEventListener('click', () => {
+      canvas.innerHTML = '';
+      formulaBox.textContent = '화학식을 여기에 보여줍니다';
+      recommendationsBox.innerHTML = '<h3>화합물 추천</h3><div id="recommendations"></div>';
+      descriptionBox.innerHTML = '<h3>원소 설명</h3><p>원소를 클릭하면 설명이 표시됩니다.</p>';
+    });
+  </script>
+  </script>
+</body>
+</html>
