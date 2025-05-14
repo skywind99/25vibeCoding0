@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit.components.v1 as components  # 이걸 꼭 추가하세요
 
 # HTML 내용을 문자열로 준비합니다.
 # 실제 사용 시에는 전체 HTML 코드를 이 안에 넣어야 합니다.
@@ -498,10 +499,12 @@ st.title("Streamlit 화학식 시뮬레이터")
 # HTML 컴포넌트 삽입
 # height는 iframe의 높이를 지정합니다. 내용에 맞게 적절히 조절해야 합니다.
 # scrolling=True를 하면 내용이 넘칠 경우 스크롤바가 생깁니다.
-st.html(html_code, height=700, scrolling=True)
+components.html(html_code, height=700, scrolling=True)
 
 # 여기에 다른 Streamlit 위젯들을 추가할 수도 있습니다.
 st.sidebar.header("Streamlit Controls")
 name = st.sidebar.text_input("Your Name")
 if name:
     st.sidebar.write(f"Hello, {name}!")
+
+
