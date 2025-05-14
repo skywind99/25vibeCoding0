@@ -8,4 +8,4 @@ html_path = os.path.join(current_dir, "periodic_simulator_fixed.html")
 with open(html_path, "r", encoding="utf-8") as f:
     html_code = f.read()
 
-components.html(html_code, width=100%, height=1000, scrolling=True)
+components.html(html_code, width="100%", height=1000, scrolling=True)
