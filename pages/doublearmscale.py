@@ -1,4 +1,4 @@
-
+'''
 from random import sample
 import random
 from datetime import datetime
@@ -139,3 +139,100 @@ while flag<players:
             flag+=1
         if flag==players:
             print("모든 플레이어가 더 이상 광물을 저울에 올릴 수 없으므로 종료됩니다 ")
+'''
+import streamlit as st
+from random import sample
+import random
+from collections import Counter
+
+# 초기 상태 설정
+if 'weights' not in st.session_state:
+    weights = sample(range(1,10), 2) + sample(range(11,21), 2) + [10]
+    random.shuffle(weights)
+    st.session_state.weights = weights
+    name = ['빨강','노랑','초록','파랑','보라']
+    st.session_state.dictionary = dict(zip(name, weights))
+    st.session_state.Tdictionary = dict(zip(weights, name))
+    st.session_state.mineral = dict(빨강=2,노랑=2,초록=2,파랑=2,보라=2)
+    st.session_state.mainleft = dict(빨강=0,노랑=0,초록=0,파랑=0,보라=0)
+    st.session_state.mainright = dict(빨강=0,노랑=0,초록=0,파랑=0,보라=0)
+    st.session_state.assisleft = dict(빨강=0,노랑=0,초록=0,파랑=0,보라=0)
+    st.session_state.assisright = dict(빨강=0,노랑=0,초록=0,파랑=0,보라=0)
+
+st.title("🎮 양팔 저울 추리 게임")
+
+st.markdown(f"🟡 `{st.session_state.Tdictionary[10]}`는 3번째로 무겁고, 무게는 10g입니다.")
+st.write("🎒 현재 보유 광물:", st.session_state.mineral)
+
+# 저울에 올릴 광물 선택
+st.subheader("1️⃣ 저울에 올릴 광물 선택")
+
+ml = st.multiselect("메인저울 왼쪽", options=name, key="ml")
+mr = st.multiselect("메인저울 오른쪽", options=name, key="mr")
+al = st.multiselect("보조저울 왼쪽", options=name, key="al")
+ar = st.multiselect("보조저울 오른쪽", options=name, key="ar")
+
+if st.button("🔍 측정하기"):
+    # 사용 광물 계산
+    use_list = ml + mr + al + ar
+    use_dict = dict(Counter(use_list))
+
+    remain_mineral = st.session_state.mineral.copy()
+    for k in use_dict:
+        remain_mineral[k] -= use_dict[k]
+
+    if any(v < 0 for v in remain_mineral.values()):
+        st.error("❌ 광물 수를 초과해서 사용할 수 없습니다.")
+    elif Counter(ml) == Counter(mr):
+        st.warning("⚠️ 메인저울 양쪽 광물 구성이 같습니다.")
+    elif len(use_list) < 2:
+        st.warning("⚠️ 최소 2개의 광물을 사용해야 합니다.")
+    else:
+        # 상태 업데이트
+        for color in ml:
+            st.session_state.mainleft[color] += 1
+        for color in mr:
+            st.session_state.mainright[color] += 1
+        for color in al:
+            st.session_state.assisleft[color] += 1
+        for color in ar:
+            st.session_state.assisright[color] += 1
+        st.session_state.mineral = remain_mineral
+
+        # 결과 계산
+        d = st.session_state.dictionary
+        mlw = sum(st.session_state.mainleft[c] * d[c] for c in name)
+        mrw = sum(st.session_state.mainright[c] * d[c] for c in name)
+        alw = sum(st.session_state.assisleft[c] * d[c] for c in name)
+        arw = sum(st.session_state.assisright[c] * d[c] for c in name)
+
+        st.subheader("📊 저울 결과")
+        st.write(f"⚖️ 메인저울 왼쪽: {mlw}g / 오른쪽: {mrw}g")
+        st.write(f"⚖️ 보조저울 왼쪽: {alw}g / 오른쪽: {arw}g")
+        if mlw == mrw:
+            st.success("✅ 메인저울 균형")
+            guess = st.text_input("무게를 추측해보세요 (예: 5,10,13,2,9)")
+            if st.button("✅ 정답 제출"):
+                try:
+                    answer = list(map(int, guess.split(',')))
+                    if answer == st.session_state.weights:
+                        st.success("🎉 정답입니다! 상금 획득!")
+                    else:
+                        st.error("❌ 정답이 아닙니다.")
+                except:
+                    st.error("입력이 올바르지 않습니다.")
+        elif mlw > mrw:
+            st.info("메인저울 왼쪽이 더 무겁습니다.")
+        else:
+            st.info("메인저울 오른쪽이 더 무겁습니다.")
+
+---
+
+### 📌 다음 단계 제안
+- 1인용 외에도 **여러 플레이어 지원** 가능 (각 세션마다 다르게)
+- 광물 이미지 + 저울 시각화도 Streamlit + HTML/CSS로 추가 가능
+- 게임 종료 조건 추가
+
+---
+
+이걸 기반으로 Streamlit 앱 구조를 더 확장할 수 있습니다. 원하시면 전체 프로젝트 템플릿도 만들어 드릴게요. 계속해서 개발 원하시나요?
