@@ -2,7 +2,8 @@ import streamlit as st
 import openai
 
 # API 키 불러오기
-openai.api_key = os.getenv("OPENAI_API_KEY")
+openai.api_key = st.secrets["OPENAI_API_KEY"]
+
 st.set_page_config(page_title="스무고개 상담AI", page_icon="🧠")
 st.title("🧠 ChatGPT 스무고개 상담 AI")
 
