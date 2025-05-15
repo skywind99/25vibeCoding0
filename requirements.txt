@@ -1,5 +1,6 @@
 plotly
 folium
 koreanize_matplotlib
-streamlit
 openai
+streamlit
+google-generativeai
