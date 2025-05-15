@@ -36,7 +36,7 @@ if st.button("답변 제출"):
         prompt += "이 고민은 무엇이며, 어떤 조언을 해주면 좋을까요?"
 
         response = openai.ChatCompletion.create(
-            model="gpt-4o-mini",
+            model="gpt-4",
             messages=[{"role": "user", "content": prompt}]
         )
         st.success(response.choices[0].message.content)
@@ -48,7 +48,7 @@ if st.button("답변 제출"):
         prompt += "다음 질문은?"
 
         response = openai.ChatCompletion.create(
-            model="gpt-4o-mini,
+            model="gpt-4",
             messages=[{"role": "user", "content": prompt}]
         )
         st.session_state.last_question = response.choices[0].message.content
