@@ -1,5 +1,11 @@
 
 import streamlit as st
+import os
+
+if os.path.exists(img):
+    st.image(img, use_container_width=True)
+else:
+    st.warning(f"이미지 파일을 찾을 수 없습니다: {img}")
 
 st.set_page_config(page_title="슬램덩크 MBTI 테스트", layout="centered")
 
