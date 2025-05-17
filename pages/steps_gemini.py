@@ -3,7 +3,7 @@ import google.generativeai as genai
 import os
 
 # API 키 환경변수에서 읽기
-GOOGLE_API_KEY = os.getenv("AIzaSyAoOn5okbLOLYXUeqwTWTuGg7aPKLGdmYs")
+GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 
 # 키 없으면 에러 처리
 if not GOOGLE_API_KEY:
