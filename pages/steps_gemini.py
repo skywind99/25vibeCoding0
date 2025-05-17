@@ -1,42 +1,27 @@
 import streamlit as st
 import google.generativeai as genai
-import os
 
-# Gemini API 키 가져오기
-genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+# Gemini API 키 설정
+genai.configure(api_key="AIzaSyAoOn5okbLOLYXUeqwTWTuGg7aPKLGdmYs")  # <- 여기에 본인의 API 키 입력
 
+# 모델 선택
 model = genai.GenerativeModel("gemini-pro")
 
-st.title("Gemini 스무고개 AI")
+# Streamlit 웹앱 UI 구성
+st.title("🌤️ Gemini에게 날씨 물어보기")
 
-if "history" not in st.session_state:
-    st.session_state.history = []
-    st.session_state.question_count = 0
-    st.session_state.last_question = "이 고민은 인간관계와 관련 있나요?"
+# 사용자 입력
+user_input = st.text_input("날씨가 궁금한 지역이나 질문을 입력하세요", "오늘 서울 날씨 어때?")
 
-# 이전 대화 표시
-for q, a in st.session_state.history:
-    st.markdown(f"**Q:** {q}  \n**A:** {a}")
-
-st.markdown(f"### 🤖 {st.session_state.last_question}")
-answer = st.radio("답변:", ("예", "아니오", "모르겠음"))
-
-if st.button("답변 제출"):
-    st.session_state.history.append((st.session_state.last_question, answer))
-    st.session_state.question_count += 1
-
-    if st.session_state.question_count >= 20:
-        prompt = "\n".join([f"Q: {q}\nA: {a}" for q, a in st.session_state.history])
-        prompt += "\n이 고민은 무엇이고 어떤 조언을 주면 좋을까?"
-
-        response = model.generate_content(prompt)
-        st.success(response.text)
-
+# 버튼 누르면 응답 생성
+if st.button("확인"):
+    if user_input:
+        with st.spinner("Gemini가 정보를 찾고 있어요..."):
+            try:
+                response = model.generate_content(f"{user_input} 날씨 알려줘. 최신 정보로 대답해줘.")
+                st.markdown("### 📡 Gemini의 답변")
+                st.write(response.text)
+            except Exception as e:
+                st.error(f"에러 발생: {e}")
     else:
-        prompt = "다음은 상담 AI의 대화입니다.\n"
-        prompt += "\n".join([f"Q: {q}\nA: {a}" for q, a in st.session_state.history])
-        prompt += "\n다음 예/아니오 질문 하나만 생성해줘."
-
-        response = model.generate_content(prompt)
-        st.session_state.last_question = response.text.strip()
-        st.experimental_rerun()
+        st.warning("먼저 질문을 입력해주세요.")
