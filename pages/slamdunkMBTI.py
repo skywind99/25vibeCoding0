@@ -26,7 +26,9 @@ questions = [
 ]
 
 for idx, (img, q, options, type_a, type_b) in enumerate(questions, 1):
-    if os.path.exists(img):
+    if img.startswith("http"):
+        st.image(img, use_container_width=True)
+    elif os.path.exists(img):
         st.image(img, use_container_width=True)
     else:
         st.warning(f"이미지가 없습니다: {img}")
