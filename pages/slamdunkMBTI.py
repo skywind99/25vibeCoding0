@@ -11,7 +11,7 @@ st.markdown("**슬램덩크 속 장면을 통해 당신의 성향을 알아보�
 score = {"E": 0, "I": 0, "S": 0, "N": 0, "T": 0, "F": 0, "J": 0, "P": 0}
 
 questions = [
-    ("img/q1.png", "경기 첫 출전, 당신은?", ["무조건 돌진! 부딪히며 배운다", "분석하고 흐름을 읽는다"], ["E", "P"], ["I", "J"]),
+    ("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEihIbPosC0grMvcg6A7ofLIKJ3kDgYw2KiyaXth7gmqJgpvQkUWoah-Vg6fn-qQjYBUCTeLBeKcjJtO0PoqPsdcF9AuUHWZb6monRjHEvBmwWFw3WqV-MAWPrQhSt5gtDeeE9vnVfYw90B-/s1600/Slam+Dunk+01_011.jpg", "경기 첫 출전, 당신은?", ["무조건 돌진! 부딪히며 배운다", "분석하고 흐름을 읽는다"], ["E", "P"], ["I", "J"]),
     ("http://t1.daumcdn.net/brunch/service/user/c7d1/image/zVQHDoo7t1iTCgMRvIVsdOG8gjs.png", "혼자 남은 체육관에서?", ["조용히 연습하며 집중", "사람들과 함께하고 싶음"], ["I", "S"], ["E", "F"]),
     ("img/q3.png", "팀이 위기에 빠졌을 때?", ["큰 소리로 독려", "조용히 작전 변경"], ["E", "T"], ["I", "F"]),
     ("img/q4.png", "라이벌과 충돌!", ["경쟁심 활활", "협력하며 균형"], ["T", "J"], ["F", "P"]),
