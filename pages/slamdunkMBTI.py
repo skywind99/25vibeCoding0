@@ -61,8 +61,8 @@ if st.button("결과 보기"):
         "INTP": ("서태웅(내면)", "img/result_intp.jpg", "말은 거의 하지 않지만 내면은 복잡하고 깊은 사고를 하는 선수. 경기 흐름과 위치를 계산하며, 자신의 세계에 몰입하는 스타일입니다.", "“…… (침묵이 가장 많은 말이다)”"),
         "ESTP": ("강백호(초기)", "img/result_estp.jpg", "행동파. 충동적이고 즉흥적이며, 분위기를 흔드는 천연 기질.", "“리바운드는 내가 왕이다!”"),
         "ESFP": ("강백호(연애모드)", "img/result_esfp.jpg", "유쾌하고 사교적. 모든 상황에 감정적으로 몰입하는 감성 행동형.", "“하루코 씨~!!”"),
-        "ENTP": ("안 감독", "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhEAEshS3nP-4TCq6RnQI6Sv0wryi7yBByWahPd0W43q12ZRHH11UtDeMide4SLN5uWH20qiT4EEy-AOXuyRBc9LkvFUvtnJsxNfFZYlqITY2s3qxegcc9HeJPcoD9ZtDKJ0jmBH_SAo0Qw/s1600/Slam+Dunk+01_086.jpg", "유쾌한 조련자. 비판에도 유머로 넘기고 문제해결에 능한 스타일.", "“넌 아직 멀었어.”"),
-        "ESFJ": ("이한나", "img/result_esfj.jpg", "팀원 하나하나를 아끼고 돌보는 따뜻한 리더십의 조율자.", "“정대만! 그만해!!”"),
+        "ENTP": ("안 감독", "", "유쾌한 조련자. 비판에도 유머로 넘기고 문제해결에 능한 스타일.", "“넌 아직 멀었어.”"),
+        "ESFJ": ("이한나", "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhEAEshS3nP-4TCq6RnQI6Sv0wryi7yBByWahPd0W43q12ZRHH11UtDeMide4SLN5uWH20qiT4EEy-AOXuyRBc9LkvFUvtnJsxNfFZYlqITY2s3qxegcc9HeJPcoD9ZtDKJ0jmBH_SAo0Qw/s1600/Slam+Dunk+01_086.jpg", "팀원 하나하나를 아끼고 돌보는 따뜻한 리더십의 조율자.", "“정대만! 그만해!!”"),
         "ENTJ": ("이정환", "img/result_entj.jpg", "경기 흐름을 통제하고, 팀 전체를 이끄는 천부적인 리더. 냉정하고 목표 지향적이며, 결정적인 순간 주저하지 않는 승부사입니다.", "“이 경기는 내가 끝낸다.”")
     }
 
