@@ -64,7 +64,7 @@ if st.button("결과 보기"):
 
     st.markdown(f"## 당신의 MBTI 유형은: **{mbti} ({name})**")
     if img_path:
-        st.image(img_path, use_column_width=True)
+        st.image(img, use_container_width=True)
     st.markdown("### 🧠 캐릭터 성향 설명")
     st.markdown(desc)
     st.markdown("### 🗣️ 명대사")
