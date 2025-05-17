@@ -48,7 +48,7 @@ if st.button("결과 보기"):
     mbti += "J" if score["J"] >= score["P"] else "P"
 
     result = {
-        "ESTJ": ("채치수", "img/result_estj.jpg", "현실적이고 팀 중심의 리더. 규율과 책임감이 강하고 팀을 끝까지 지키는 인물.", "“넌 기본이 안 돼 있어!”"),
+        "ESTJ": ("채치수", "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg0t9zNuOY2vfZcXqHuOwmMd01aEbj1uUoB7jPqj0ba-9mv3-eftTiievahEiO2umvFC5w0gl9F9djnRNRCCQTCQjpbKjgCd9r58cEwyrFQ_kwLWgOye0WY58ANWoDj2kZpVHCiJXqzpifK/s1600/Slam+Dunk+01_098.jpg", "현실적이고 팀 중심의 리더. 규율과 책임감이 강하고 팀을 끝까지 지키는 인물.", "“넌 기본이 안 돼 있어!”"),
         "ENFP": ("강백호", "img/result_enfp.jpg", "열정적이며 감성적. 실수도 많지만 진심이 있고 팀과 함께 성장하는 인물.", "“하루코 씨~!!”"),
         "ENFJ": ("정대만", "img/result_enfj.jpg", "감성적인 리더. 사람을 이끄는 능력이 있으며, 열정과 후회가 공존함.", "“3년간… 난 뭐 했지…”"),
         "ISTJ": ("서태웅", "img/result_istj.jpg", "조용하고 실력 중심. 말보다 행동으로 보여주는 냉정한 승부사.", "“너도 농구 좋아하잖아…”"),
