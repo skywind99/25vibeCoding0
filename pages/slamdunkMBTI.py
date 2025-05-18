@@ -13,16 +13,16 @@ score = {"E": 0, "I": 0, "S": 0, "N": 0, "T": 0, "F": 0, "J": 0, "P": 0}
 questions = [
     ("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEihIbPosC0grMvcg6A7ofLIKJ3kDgYw2KiyaXth7gmqJgpvQkUWoah-Vg6fn-qQjYBUCTeLBeKcjJtO0PoqPsdcF9AuUHWZb6monRjHEvBmwWFw3WqV-MAWPrQhSt5gtDeeE9vnVfYw90B-/s1600/Slam+Dunk+01_011.jpg", "경기 첫 출전, 당신은?", ["무조건 돌진! 부딪히며 배운다", "분석하고 흐름을 읽는다"], ["E", "P"], ["I", "J"]),
     ("http://t1.daumcdn.net/brunch/service/user/c7d1/image/zVQHDoo7t1iTCgMRvIVsdOG8gjs.png", "혼자 남은 체육관에서?", ["조용히 연습하며 집중", "사람들과 함께하고 싶음"], ["I", "S"], ["E", "F"]),
-    ("img/q3.png", "팀이 위기에 빠졌을 때?", ["큰 소리로 독려", "조용히 작전 변경"], ["E", "T"], ["I", "F"]),
+    ("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjxY8WCL3kAIVX0KKlH8C75-3PVjY9bKK4xH7lJA0bDHDkKeIdpxhsPwD_INZt6VH1xmkK4aXv_3vi4xc1gLk0-rKd3V2AV6Cdw-eOmijnffrf2gZrk1lWscYne-F4q7XipypCHC6a2-nEW/s1600/Slam+Dunk+03_122.jpg", "팀이 위기에 빠졌을 때?", ["큰 소리로 독려", "조용히 작전 변경"], ["E", "T"], ["I", "F"]),
     ("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhlXLHZjQYEwkczfwTpGTGoTxZOW43ntSdz5Fd68GRw43gID6rKiSVAmOBlzUBffhd-aWj3L6goons5bRljucxRyGVSTNvN_JdzqiO_jWcEd-ZWamjJIXj8_8KBSS4MAmTpRhQqGbP8t11D/s1600/Slam+Dunk+02_032.jpg", "라이벌과 충돌!", ["경쟁심 활활", "협력하며 균형"], ["T", "J"], ["F", "P"]),
     ("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg0t9zNuOY2vfZcXqHuOwmMd01aEbj1uUoB7jPqj0ba-9mv3-eftTiievahEiO2umvFC5w0gl9F9djnRNRCCQTCQjpbKjgCd9r58cEwyrFQ_kwLWgOye0WY58ANWoDj2kZpVHCiJXqzpifK/s1600/Slam+Dunk+01_098.jpg", "감독에게 꾸중 들었다면?", ["말대꾸 & 반항", "묵묵히 증명"], ["E", "P"], ["I", "J"]),
     ("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi81HrF1UMzWqtByDx7t6unn3T2n1ZM-AjStbw7jP85YqjqBMuYRanwsO3gMLrDMgx9ledEEZLGhcJ0_qYctwI9grywCdstdfoe6CFm6o9mtVWYMdHGB3MmxI5cMtWu20QkDizwIPqEomhP/s1600/Slam+Dunk+01_101.jpg", "남는 시간 당신은?", ["체력 훈련", "작전 상상"], ["S", "J"], ["N", "P"]),
     ("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgIu6QzSBu3CtxeTmDtStOpDP1V4qlK-r3YaWR1oHbpJPdv_oKyiU9rMRKZ7PknhC4YV7oUpzNEr7t0Ej-_bDbYAgIN-jY_CSILSEREOAtryVX1xIJ-xUHWHKob07IQrEUNp71Jyz28e1qE/s1600/Slam+Dunk+02_089.jpg", "당신의 습관은?", ["루틴대로 움직임", "즉흥적으로 행동"], ["S", "J"], ["N", "P"]),
-    ("img/q8.png", "팀원과 싸웠을 때?", ["감정 바로 풀기", "생각 정리 후 대화"], ["F", "E"], ["T", "I"]),
+    ("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjoUtZ9bNbf3PbMnRTlVWyBXYvM7yJWRYs6hGM070b2cR1lmKFHGMmWWKH-KNfR2r8-YHFO3p7qRNUOSGnHvhIs66EfHFuxYU5Z66oQjZCDKSANf9wGTVNGrAjKlB40RBhEXrcZCRr9Zi3H/s1600/Slam+Dunk+02_101.jpg", "팀원과 싸웠을 때?", ["감정 바로 풀기", "생각 정리 후 대화"], ["F", "E"], ["T", "I"]),
     ("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgS9Uesc-T4WKKJgrnI7BXEpoXEbgi7-AQkat6fmN-7agoMtjkfukGkrvnX8F7kTRzVkdk64jUAfscyfmR0LFfMSta6u9GMvIJcLJLihHP0QUMduI4gxecQMjbqQjlIm8v-H0OAHBFnIDWM/s1600/Slam+Dunk+03_021.jpg", "중요한 경기 전날?", ["계획 복습", "마음 편히 잠"], ["J", "T"], ["P", "F"]),
     ("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg5R5EfE-c2fW4oLMD3p1Vl7OE_sXWuubYhaXbsoiL8OV7kV5uCYOOi4rEwSe5H3zIsoO_H8gWt_NW4GkZlhHhrRTTiv1KfQPe3AF3OwvqZfZhomiMQSzy0BOxoXHXJmgmlSY-47WnQWi68/s1600/Slam+Dunk+01_062.jpg", "관중석에 누군가 왔다!", ["신경 쓰임", "경기에만 집중"], ["F", "E"], ["T", "I"]),
     ("img/q11.png", "이긴 후 당신은?", ["함께 외치며 축하", "속으로 뿌듯"], ["E", "F"], ["I", "T"]),
-    ("img/q12.png", "졌을 때 당신은?", ["다음 각오 다짐", "멍 때리며 감정에 빠짐"], ["N", "J"], ["S", "F"]),
+    ("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjVFlHJ7xyCm7BYFmirUSW0KO3ZCqlI3mNHWaDvaTbQs5CtNtx8ZhMvT1y_sCHCpUHKKpmyHKRgc3jHEF90Uk2z1sH6t8PZ6CGof7pU4grpWcMcX5sej-nqKOg_mERzmlFqRr_OFFQm87z_/s1600/Slam+Dunk+05_028.jpg", "졌을 때 당신은?", ["다음 각오 다짐", "멍 때리며 감정에 빠짐"], ["N", "J"], ["S", "F"]),
 ]
 
 for idx, (img, q, options, type_a, type_b) in enumerate(questions, 1):
@@ -56,7 +56,7 @@ if st.button("결과 보기"):
         "INFJ": ("채치수(내면)", "img/result_infj.jpg", "겉으로는 강하지만 속마음은 팀 걱정뿐인 헌신형 리더. 외유내강.", "“포기란 말은 없다!”"),
         "INTJ": ("정우성", "img/result_intj.jpg", "계획적이고 분석적인 지휘자. 모든 상황을 계산하고 주도하는 전략가.", "상양전 작전 지시 장면"),
         "ISTP": ("정대만", "img/result_istp.jpg", "위기에 강한 현실주의자. 침착하고 빠른 판단력, 단호한 행동력의 소유자.", "“미안하다, 나 아직 농구가 하고 싶어.”"),
-        "ISFP": ("정대만(내면)", "img/result_isfp.jpg", "말 없이 묵묵히 훈련에 임하는 스타일. 감정은 깊지만 잘 드러내지 않음.", "복귀 전 회상 장면"),
+        "ISFP": ("정대만(내면)", "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj5r5X6H36inLtK6A3PQsPB2p1STXwd3v7RNIB2cpE9wzEgjz_CSVOAtelZ5W8auyxryQEhcYdsIWVaOSX-J7JbZSqJyzuc4iUdBafX2AxUL91wlT4-wR3fPBUHCHp1-gJHfZPZurc02lsv/s1600/Slam+Dunk+07_013.jpg", "말 없이 묵묵히 훈련에 임하는 스타일. 감정은 깊지만 잘 드러내지 않음.", "복귀 전 회상 장면"),
         "INFP": ("채치수 동생", "img/result_infp.jpg", "조용하고 감성적인 이상주의자. 이상과 신념이 뚜렷함.", "가족 응원 장면"),
         "INTP": ("서태웅(내면)", "img/result_intp.jpg", "말은 거의 하지 않지만 내면은 복잡하고 깊은 사고를 하는 선수. 경기 흐름과 위치를 계산하며, 자신의 세계에 몰입하는 스타일입니다.", "“…… (침묵이 가장 많은 말이다)”"),
         "ESTP": ("강백호(초기)", "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjh7Ana_pDZsNQYqTbavOYktoRCaYah3no1QthWQMvrxsIMl6N8bJj5d6JsUtHyUD7UjnbQlDGjpYNTqi2xu5QbRk6hjfz6eAyTJySEx1HlA4gK3J11noaPRPuPXqZL9TMJLZ8JMz7FUQ3n/s1600/Slam+Dunk+01_059.jpg", "행동파. 충동적이고 즉흥적이며, 분위기를 흔드는 천연 기질.", "“리바운드는 내가 왕이다!”"),
