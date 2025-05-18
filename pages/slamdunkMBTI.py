@@ -155,7 +155,7 @@ result = {
     ]
 }
 
-name, img_path, desc, quote = result.get(mbti, ("알 수 없음", "", "결과를 찾을 수 없습니다.", ""))
+name, img_path, desc, quote = result.get(mbti, ("알 수 없음", "", "결과 없음", "명대사 없음"))
 
 st.markdown(f"## 당신의 MBTI 유형은: **{mbti} ({name})**")
 
