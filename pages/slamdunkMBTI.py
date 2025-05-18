@@ -84,8 +84,10 @@ else:
     name, img_path, desc, quote = result.get(mbti, ("알 수 없음", "", "결과를 찾을 수 없습니다.", ""))
 
     st.markdown(f"## 당신의 MBTI 유형은: **{mbti} ({name})**")
-    if os.path.exists(img_path):
-        st.image(img_path, use_container_width=True)
+    if img.startswith("http"):
+        st.image(img, use_container_width=True)
+    elif os.path.exists(img):
+        st.image(img, use_container_width=True)
     else:
         st.warning(f"결과 이미지가 없습니다: {img_path}")
     st.markdown("### 🧠 캐릭터 성향 설명")
