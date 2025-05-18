@@ -54,7 +54,7 @@ if st.session_state.page < q_count:
             for t in type_b:
                 st.session_state.score[t] += 1
         st.session_state.page += 1
-        st.experimental_rerun()
+        st.rerun()
 else:
     score = st.session_state.score
     mbti = ""
