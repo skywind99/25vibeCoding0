@@ -8,7 +8,13 @@ st.title("🏀 슬램덩크 MBTI 성향 테스트")
 st.markdown("**슬램덩크 속 장면을 통해 당신의 성향을 알아보세요!**")
 
 # 점수 초기화
-score = {"E": 0, "I": 0, "S": 0, "N": 0, "T": 0, "F": 0, "J": 0, "P": 0}
+# 점수 및 페이지 상태 초기화
+if "score" not in st.session_state:
+    st.session_state.score = {"E": 0, "I": 0, "S": 0, "N": 0, "T": 0, "F": 0, "J": 0, "P": 0}
+if "page" not in st.session_state:
+    st.session_state.page = 0
+if "answers" not in st.session_state:
+    st.session_state.answers = []
 
 questions = [
     ("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEihIbPosC0grMvcg6A7ofLIKJ3kDgYw2KiyaXth7gmqJgpvQkUWoah-Vg6fn-qQjYBUCTeLBeKcjJtO0PoqPsdcF9AuUHWZb6monRjHEvBmwWFw3WqV-MAWPrQhSt5gtDeeE9vnVfYw90B-/s1600/Slam+Dunk+01_011.jpg", "경기 첫 출전, 당신은?", ["무조건 돌진! 부딪히며 배운다", "분석하고 흐름을 읽는다"], ["E", "P"], ["I", "J"]),
