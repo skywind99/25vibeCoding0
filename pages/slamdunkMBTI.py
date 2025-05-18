@@ -55,13 +55,7 @@ if st.session_state.page < q_count:
                 st.session_state.score[t] += 1
         st.session_state.page += 1
         st.rerun()
-else:
-    score = st.session_state.score
-    mbti = ""
-    mbti += "E" if score["E"] >= score["I"] else "I"
-    mbti += "S" if score["S"] >= score["N"] else "N"
-    mbti += "T" if score["T"] >= score["F"] else "F"
-    mbti += "J" if score["J"] >= score["P"] else "P"
+
 result = {
     "ESTJ": [
         "채치수",
@@ -154,25 +148,32 @@ result = {
         "“넌 아직 멀었어.”"
     ]
 }
-
-name, img_path, desc, quote = result.get(mbti, ("알 수 없음", "", "결과 없음", "명대사 없음"))
-
-st.markdown(f"## 당신의 MBTI 유형은: **{mbti} ({name})**")
-
-if os.path.exists(img_path):
-    st.image(img_path, use_container_width=True)
-elif img_path.startswith("http"):
-    st.image(img_path, use_container_width=True)
 else:
-    st.warning(f"결과 이미지가 없습니다: {img_path}")
+    score = st.session_state.score
+    mbti = ""
+    mbti += "E" if score["E"] >= score["I"] else "I"
+    mbti += "S" if score["S"] >= score["N"] else "N"
+    mbti += "T" if score["T"] >= score["F"] else "F"
+    mbti += "J" if score["J"] >= score["P"] else "P"
 
-st.markdown("### 🧠 캐릭터 성향 설명")
-st.markdown(desc)
-st.markdown("### 🗣️ 명대사")
-st.markdown(f"> {quote}")
+    name, img_path, desc, quote = result.get(mbti, ("알 수 없음", "", "결과 없음", "명대사 없음"))
 
-if st.button("🔁 다시 테스트하기"):
-    st.session_state.page = 0
-    st.session_state.score = {"E": 0, "I": 0, "S": 0, "N": 0, "T": 0, "F": 0, "J": 0, "P": 0}
-    st.session_state.answers = []
-    st.rerun()  # 최신 버전에서는 st.rerun() 사용
+    st.markdown(f"## 당신의 MBTI 유형은: **{mbti} ({name})**")
+
+    if os.path.exists(img_path):
+        st.image(img_path, use_container_width=True)
+    elif img_path.startswith("http"):
+        st.image(img_path, use_container_width=True)
+    else:
+        st.warning(f"결과 이미지가 없습니다: {img_path}")
+
+    st.markdown("### 🧠 캐릭터 성향 설명")
+    st.markdown(desc)
+    st.markdown("### 🗣️ 명대사")
+    st.markdown(f"> {quote}")
+
+    if st.button("🔁 다시 테스트하기"):
+        st.session_state.page = 0
+        st.session_state.score = {"E": 0, "I": 0, "S": 0, "N": 0, "T": 0, "F": 0, "J": 0, "P": 0}
+        st.session_state.answers = []
+        st.rerun()
