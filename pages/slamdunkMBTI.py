@@ -18,7 +18,7 @@ if "answers" not in st.session_state:
 
 questions = [
     ("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEihIbPosC0grMvcg6A7ofLIKJ3kDgYw2KiyaXth7gmqJgpvQkUWoah-Vg6fn-qQjYBUCTeLBeKcjJtO0PoqPsdcF9AuUHWZb6monRjHEvBmwWFw3WqV-MAWPrQhSt5gtDeeE9vnVfYw90B-/s1600/Slam+Dunk+01_011.jpg", "경기 첫 출전, 당신은?", ["무조건 돌진! 부딪히며 배운다", "분석하고 흐름을 읽는다"], ["E", "P"], ["I", "J"]),
-    ("http://t1.daumcdn.net/brunch/service/user/c7d1/image/zVQHDoo7t1iTCgMRvIVsdOG8gjs.png", "혼자 남은 체육관에서?", ["조용히 연습하며 집중", "사람들과 함께하고 싶음"], ["I", "S"], ["E", "F"]),
+    ("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhKxqw2JvWlunj0QSoe4QBCzSVktuqvvz2x5Nzro4gIG-vlHEY2eL_EvPI0ENamcsiNbtNxq-45CNgkmOrOXCqsOs2rUz9qG5bPZw7QFTanXxBm0L2haG_HqYVrnbtaHH3FYffJ4GNYQc6g/s1600/Slam+Dunk+17_124.jpg", "혼자 남은 체육관에서?", ["조용히 연습하며 집중", "사람들과 함께하고 싶음"], ["I", "S"], ["E", "F"]),
     ("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjxY8WCL3kAIVX0KKlH8C75-3PVjY9bKK4xH7lJA0bDHDkKeIdpxhsPwD_INZt6VH1xmkK4aXv_3vi4xc1gLk0-rKd3V2AV6Cdw-eOmijnffrf2gZrk1lWscYne-F4q7XipypCHC6a2-nEW/s1600/Slam+Dunk+03_122.jpg", "팀이 위기에 빠졌을 때?", ["큰 소리로 독려", "조용히 작전 변경"], ["E", "T"], ["I", "F"]),
     ("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhlXLHZjQYEwkczfwTpGTGoTxZOW43ntSdz5Fd68GRw43gID6rKiSVAmOBlzUBffhd-aWj3L6goons5bRljucxRyGVSTNvN_JdzqiO_jWcEd-ZWamjJIXj8_8KBSS4MAmTpRhQqGbP8t11D/s1600/Slam+Dunk+02_032.jpg", "라이벌과 충돌!", ["경쟁심 활활", "협력하며 균형"], ["T", "J"], ["F", "P"]),
     ("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg0t9zNuOY2vfZcXqHuOwmMd01aEbj1uUoB7jPqj0ba-9mv3-eftTiievahEiO2umvFC5w0gl9F9djnRNRCCQTCQjpbKjgCd9r58cEwyrFQ_kwLWgOye0WY58ANWoDj2kZpVHCiJXqzpifK/s1600/Slam+Dunk+01_098.jpg", "감독에게 꾸중 들었다면?", ["말대꾸 & 반항", "묵묵히 증명"], ["E", "P"], ["I", "J"]),
