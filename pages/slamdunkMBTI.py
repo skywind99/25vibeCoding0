@@ -17,7 +17,7 @@ questions = [
     ("img/q4.png", "라이벌과 충돌!", ["경쟁심 활활", "협력하며 균형"], ["T", "J"], ["F", "P"]),
     ("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg0t9zNuOY2vfZcXqHuOwmMd01aEbj1uUoB7jPqj0ba-9mv3-eftTiievahEiO2umvFC5w0gl9F9djnRNRCCQTCQjpbKjgCd9r58cEwyrFQ_kwLWgOye0WY58ANWoDj2kZpVHCiJXqzpifK/s1600/Slam+Dunk+01_098.jpg", "감독에게 꾸중 들었다면?", ["말대꾸 & 반항", "묵묵히 증명"], ["E", "P"], ["I", "J"]),
     ("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi81HrF1UMzWqtByDx7t6unn3T2n1ZM-AjStbw7jP85YqjqBMuYRanwsO3gMLrDMgx9ledEEZLGhcJ0_qYctwI9grywCdstdfoe6CFm6o9mtVWYMdHGB3MmxI5cMtWu20QkDizwIPqEomhP/s1600/Slam+Dunk+01_101.jpg", "남는 시간 당신은?", ["체력 훈련", "작전 상상"], ["S", "J"], ["N", "P"]),
-    ("img/q7.png", "당신의 습관은?", ["루틴대로 움직임", "즉흥적으로 행동"], ["S", "J"], ["N", "P"]),
+    ("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgIu6QzSBu3CtxeTmDtStOpDP1V4qlK-r3YaWR1oHbpJPdv_oKyiU9rMRKZ7PknhC4YV7oUpzNEr7t0Ej-_bDbYAgIN-jY_CSILSEREOAtryVX1xIJ-xUHWHKob07IQrEUNp71Jyz28e1qE/s1600/Slam+Dunk+02_089.jpg", "당신의 습관은?", ["루틴대로 움직임", "즉흥적으로 행동"], ["S", "J"], ["N", "P"]),
     ("img/q8.png", "팀원과 싸웠을 때?", ["감정 바로 풀기", "생각 정리 후 대화"], ["F", "E"], ["T", "I"]),
     ("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgS9Uesc-T4WKKJgrnI7BXEpoXEbgi7-AQkat6fmN-7agoMtjkfukGkrvnX8F7kTRzVkdk64jUAfscyfmR0LFfMSta6u9GMvIJcLJLihHP0QUMduI4gxecQMjbqQjlIm8v-H0OAHBFnIDWM/s1600/Slam+Dunk+03_021.jpg", "중요한 경기 전날?", ["계획 복습", "마음 편히 잠"], ["J", "T"], ["P", "F"]),
     ("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg5R5EfE-c2fW4oLMD3p1Vl7OE_sXWuubYhaXbsoiL8OV7kV5uCYOOi4rEwSe5H3zIsoO_H8gWt_NW4GkZlhHhrRTTiv1KfQPe3AF3OwvqZfZhomiMQSzy0BOxoXHXJmgmlSY-47WnQWi68/s1600/Slam+Dunk+01_062.jpg", "관중석에 누군가 왔다!", ["신경 쓰임", "경기에만 집중"], ["F", "E"], ["T", "I"]),
