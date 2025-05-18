@@ -62,25 +62,99 @@ else:
     mbti += "S" if score["S"] >= score["N"] else "N"
     mbti += "T" if score["T"] >= score["F"] else "F"
     mbti += "J" if score["J"] >= score["P"] else "P"
+result = {
+    "ESTJ": [
+        "채치수",
+        "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj-N-CWdlFyHhqkM3t_BDYIpGxGMkLx47goo5EbfsRp9h3747gXHmk9LJhDqI-wN_qjgjT42q2jQmVE7pC5ccJVf7q_hENiICnWxZhQxaKq3jwhCuFvs8U598tZhZS2IM35IBRH6QqYQXsJ/s1600/Slam+Dunk+22_042.jpg",
+        "현실적이고 규칙 중심적인 리더. 항상 팀을 먼저 생각하고 원칙을 중시한다.",
+        "“넌 기본이 안 돼 있어!”"
+    ],
+    "ISTJ": [
+        "송태섭",
+        "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj-npzvdJqeUPsi6BeU0GM65OX02cdW8vK6XisqpGo7OiPrnWmDUzd-DfIU1Kurm59uI2QPmKcLfl-UKhqynM1S88e3gLrgaOlSKuA9GVLwNd7YW66yYFAhadHcFsrNkGLd9Smw1YeiDmj7/s1600/Slam+Dunk+09_098.jpg",
+        "꼼꼼하고 신중한 성격의 수비 전문 플레이어. 항상 계산적인 경기 운영을 선호한다.",
+        "“내가 막을게.”"
+    ],
+    "ESFJ": [
+        "이한나",
+        "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjuI9bEnCDfLrnQ6Zazkv4_OOtfA2JluLSLMpG0XONVS1qP5kX4JkQZvFOX72Q2dwYPIpyfln9y_13_tyUL-I2vOzlvrMgEZxP8N__JR1sg5pGf_ouffwEGyLI_o2N4Aa73bLfkjFbqf4WL/s1600/Slam+Dunk+21_060.jpg",
+        "팀원 하나하나를 세심히 챙기며 헌신하는 리더십을 발휘하는 조율자.",
+        "“정대만! 그만해!!”"
+    ],
+    "ISFJ": [
+        "채소연",
+        "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhVdwuzQQolg72em3h6HejaEwOpybtXJqoWwrfbOrV-tutGJVlHGMReBT3APrtk8c7pdixt2X8cazfXCHD_FA3Njt3twFFZOdysHbK1PluYYKrIUKtaPf0pFw9TwC_N_hR_rQ7n5pXyaxXy/s1600/Slam+Dunk+01_092.jpg",
+        "배려심이 많고 조용히 응원하는 스타일. 주변을 따뜻하게 만든다.",
+        "“강백호 군… 멋져요!”"
+    ],
+    "ENTJ": [
+        "이정환",
+        "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhDtWRdYoSzH9amQM2c72lfoZ6QtSm_jp08pXbSsg2wjelYOLHo1akUgJo-fCEuNge1OZl_Vx0G39hZFtSJRLi5QPsIV-XEG5TOtxZ0IncbXy56X6srnZFYX3y2C4rdc7xxbHaAq54wLwL7/s1600/Slam+Dunk+09_090.jpg",
+        "전략적인 사고로 경기를 이끄는 완벽주의 리더. 냉정하고 목표 지향적이다.",
+        "“이 경기는 내가 끝낸다.”"
+    ],
+    "INTJ": [
+        "정우성",
+        "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhPIeMav1h3b4fLgIXmdXenrgqVAuAetn4ry6EHx_mOIp33QDugTbI0cqS4enB0P_3-lLtlS8rlYO33RQv4jr0tJSZZtXTGWtfnNu714nLpuPgG57gwUm34Sj_qloMyzl7kzw3mhJxjGYHN/s1600/Slam+Dunk+22_105.jpg",
+        "경기 흐름을 예측하고 분석하는 전략가. 항상 이기는 방법을 계산한다.",
+        "“흐름은 우리 쪽이다.”"
+    ],
+    "ENFJ": [
+        "아야코",
+        "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgf_KP7FGGT6qUiCu4tH4bp3RCMTax1DpwmnuXLUkpDeqCEMVXi8EY0luuyI9J6m-zP3BkzhaXm26Wy2JerS5mvRvNyHrVXrF5KpeflNjMqWou6RR1luhHrQGjQvY4XOGLU7puRuWBPVYJD/s1600/Slam+Dunk+07_032.jpg",
+        "감성적이고 따뜻한 리더. 팀의 분위기를 이끌며 감정적으로도 중심을 잡는다.",
+        "“무리하지 마!”"
+    ],
+    "INFJ": [
+        "정우성(내면)",
+        "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgKVqtHF8MjQBgNpxjo6pnxfIeHPrScoNiAj34j7FCgQ4o1sE_Yrir4WUJsZUosG6kcp7HiE9fxwURKaf_XH7UjB4UjPNhwD1rZmrNqB7Mrb0qcKrWMym7t2jNmXzB8v72moGXXt-Abll8J/s1600/Slam+Dunk+09_092.jpg",
+        "강인한 외면 아래 팀과의 유대와 목표를 내면 깊이 간직한 이상주의자.",
+        "“지금은 보여줄 때야.”"
+    ],
+    "ESTP": [
+        "상양 센터",
+        "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjh7Ana_pDZsNQYqTbavOYktoRCaYah3no1QthWQMvrxsIMl6N8bJj5d6JsUtHyUD7UjnbQlDGjpYNTqi2xu5QbRk6hjfz6eAyTJySEx1HlA4gK3J11noaPRPuPXqZL9TMJLZ8JMz7FUQ3n/s1600/Slam+Dunk+01_059.jpg",
+        "직감적이고 즉흥적인 플레이어. 본능적으로 움직이며 팀의 흐름을 뒤흔든다.",
+        "“박살내주마.”"
+    ],
+    "ISTP": [
+        "미츠이 히사시",
+        "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjyF4laJ3OaLiImGD__aUhSb8zbgUsNAxVSczWrkV6q2pUnPw_EQHZJbst9DhFmy-dSkgj92D_d09LPvg8wWpeOCUlUIJ3BKr6VW5ilZGRbVeMnWrQx0YXLL5dXr56Pfyq8lEBPBD_mVlMj/s1600/Slam+Dunk+07_033.jpg",
+        "냉정하고 침착한 판단력의 소유자. 결정적 순간에 강한 현실적 승부사.",
+        "“아직 농구가 하고 싶다.”"
+    ],
+    "ESFP": [
+        "강백호(초기)",
+        "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhRafrPkxp_gZH7UuXELmizEk1PgJ3TdLfl61SLuFypOkEe0hzOHlxBBt4sZVAMNWb5YO072r2f69xCwpcfuNHEr2Lc3bLY0PvpICd1COOmxsQSvJ7ErGRcFxrYiwNUxpO1JmjJ9JOAK9BZ/s1600/Slam+Dunk+08_088.jpg",
+        "감정적이고 즉흥적인 행동파. 분위기 메이커이자 예측불가.",
+        "“하루코씨~!!”"
+    ],
+    "ISFP": [
+        "정대만",
+        "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj5r5X6H36inLtK6A3PQsPB2p1STXwd3v7RNIB2cpE9wzEgjz_CSVOAtelZ5W8auyxryQEhcYdsIWVaOSX-J7JbZSqJyzuc4iUdBafX2AxUL91wlT4-wR3fPBUHCHp1-gJHfZPZurc02lsv/s1600/Slam+Dunk+07_013.jpg",
+        "감정을 드러내지 않지만 내면은 누구보다 뜨거운 이상주의자.",
+        "“과거는 지우고 싶지 않다.”"
+    ],
+    "ENFP": [
+        "강백호",
+        "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEikxmuF1XGSvUFT6pkw0u_wecqKJ0b8LL8d9qSeqtbWxisFWS9k2Zfp3B2oJtGiHkgCH-8i8ibEFm4yqBD6J3l4E4BwjCFclHai18pLJcu3jPdSXg1otIYCFDQvUmUoptzGlz_5BQwE7oRQ/s1600/Slam+Dunk+07_113.jpg",
+        "열정적이고 감성적인 플레이어. 실수도 많지만 누구보다 진심이다.",
+        "“리바운드~!!”"
+    ],
+    "INFP": [
+        "하나미치 팬",
+        "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEghdl8SrH4gsWckRaFOvLxmdNOrtyXpAEBDR3NBIoK59UKMs4dGWUk6Ouqis59azq2Bgpl2Shp07HNg9GEFt8mx41jJmQTbIVMYyyLKY_ojAAZAS3YAT_IARfvX4R0hZPqBnzbywtkvpooN/s1600/Slam+Dunk+11_122.jpg",
+        "감성을 기반으로 농구를 사랑하는 순수한 열정의 인물.",
+        "“강백호 최고야!”"
+    ],
+    "ENTP": [
+        "안 감독",
+        "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg_cnkGF2LSvVcCQE_-B7oTvyICUH9QsIV7qfJfDaug1xZtDnsgF8IbIIhw4ZFzEHHK_2JgtVRsM8QNhIijdY_-fqfyL8_r9h206OWhyphenhyphengNbi2PMpSUJR_tIAr58rTLlLDvfKeB9o_fXVyOz/s1600/Slam+Dunk+01_114.jpg",
+        "재치 있고 유쾌한 분위기 메이커. 상황을 전환하는 지략가형 감독.",
+        "“넌 아직 멀었어.”"
+    ]
+}
 
-    result = {
-        "ESTJ": ("채치수", "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj-N-CWdlFyHhqkM3t_BDYIpGxGMkLx47goo5EbfsRp9h3747gXHmk9LJhDqI-wN_qjgjT42q2jQmVE7pC5ccJVf7q_hENiICnWxZhQxaKq3jwhCuFvs8U598tZhZS2IM35IBRH6QqYQXsJ/s1600/Slam+Dunk+22_042.jpg", "현실적이고 팀 중심의 리더. 규율과 책임감이 강하고 팀을 끝까지 지키는 인물.", "“넌 기본이 안 돼 있어!”"),
-        "ENFP": ("강백호", "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEikxmuF1XGSvUFT6pkw0u_wecqKJ0b8LL8d9qSeqtbWxisFWS9k2Zfp3B2oJtGiHkgCH-8i8ibEFm4yqBD6J3l4E4BwjCFclHai18pLJcu3jPdSXg1otIYCFDQvUmUoptzGlz_5BQwE7oRQ/s1600/Slam+Dunk+07_113.jpg", "열정적이며 감성적. 실수도 많지만 진심이 있고 팀과 함께 성장하는 인물.", "“리바운드~!!”"),
-        "ENFJ": ("정대만", "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgf_KP7FGGT6qUiCu4tH4bp3RCMTax1DpwmnuXLUkpDeqCEMVXi8EY0luuyI9J6m-zP3BkzhaXm26Wy2JerS5mvRvNyHrVXrF5KpeflNjMqWou6RR1luhHrQGjQvY4XOGLU7puRuWBPVYJD/s1600/Slam+Dunk+07_032.jpg", "감성적인 리더. 사람을 이끄는 능력이 있으며, 열정과 후회가 공존함.", "“3년간… 난 뭐 했지…”"),
-        "ISTJ": ("서태웅", "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj-npzvdJqeUPsi6BeU0GM65OX02cdW8vK6XisqpGo7OiPrnWmDUzd-DfIU1Kurm59uI2QPmKcLfl-UKhqynM1S88e3gLrgaOlSKuA9GVLwNd7YW66yYFAhadHcFsrNkGLd9Smw1YeiDmj7/s1600/Slam+Dunk+09_098.jpg", "조용하고 실력 중심. 말보다 행동으로 보여주는 냉정한 승부사.", "“너도 농구 좋아하잖아…”"),
-        "ISFJ": ("채소연", "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhVdwuzQQolg72em3h6HejaEwOpybtXJqoWwrfbOrV-tutGJVlHGMReBT3APrtk8c7pdixt2X8cazfXCHD_FA3Njt3twFFZOdysHbK1PluYYKrIUKtaPf0pFw9TwC_N_hR_rQ7n5pXyaxXy/s1600/Slam+Dunk+01_092.jpg", "상냥하고 배려심 깊은 감성형. 주변을 챙기며 조용히 응원하는 스타일.", "“강백호 군… 멋져요!”"),
-        "INFJ": ("채치수(내면)", "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgKVqtHF8MjQBgNpxjo6pnxfIeHPrScoNiAj34j7FCgQ4o1sE_Yrir4WUJsZUosG6kcp7HiE9fxwURKaf_XH7UjB4UjPNhwD1rZmrNqB7Mrb0qcKrWMym7t2jNmXzB8v72moGXXt-Abll8J/s1600/Slam+Dunk+09_092.jpg", "겉으로는 강하지만 속마음은 팀 걱정뿐인 헌신형 리더. 외유내강.", "“포기란 말은 없다!”"),
-        "INTJ": ("정우성", "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhPIeMav1h3b4fLgIXmdXenrgqVAuAetn4ry6EHx_mOIp33QDugTbI0cqS4enB0P_3-lLtlS8rlYO33RQv4jr0tJSZZtXTGWtfnNu714nLpuPgG57gwUm34Sj_qloMyzl7kzw3mhJxjGYHN/s1600/Slam+Dunk+22_105.jpg", "계획적이고 분석적인 지휘자. 모든 상황을 계산하고 주도하는 전략가.", "산왕전 작전 지시 장면"),
-        "ISTP": ("정대만", "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjyF4laJ3OaLiImGD__aUhSb8zbgUsNAxVSczWrkV6q2pUnPw_EQHZJbst9DhFmy-dSkgj92D_d09LPvg8wWpeOCUlUIJ3BKr6VW5ilZGRbVeMnWrQx0YXLL5dXr56Pfyq8lEBPBD_mVlMj/s1600/Slam+Dunk+07_033.jpg", "위기에 강한 현실주의자. 침착하고 빠른 판단력, 단호한 행동력의 소유자.", "“미안하다, 나 아직 농구가 하고 싶어.”"),
-        "ISFP": ("정대만(내면)", "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj5r5X6H36inLtK6A3PQsPB2p1STXwd3v7RNIB2cpE9wzEgjz_CSVOAtelZ5W8auyxryQEhcYdsIWVaOSX-J7JbZSqJyzuc4iUdBafX2AxUL91wlT4-wR3fPBUHCHp1-gJHfZPZurc02lsv/s1600/Slam+Dunk+07_013.jpg", "말 없이 묵묵히 훈련에 임하는 스타일. 감정은 깊지만 잘 드러내지 않음.", "복귀 전 회상 장면"),
-        "INFP": ("채치수 동생", "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEghdl8SrH4gsWckRaFOvLxmdNOrtyXpAEBDR3NBIoK59UKMs4dGWUk6Ouqis59azq2Bgpl2Shp07HNg9GEFt8mx41jJmQTbIVMYyyLKY_ojAAZAS3YAT_IARfvX4R0hZPqBnzbywtkvpooN/s1600/Slam+Dunk+11_122.jpg", "조용하고 감성적인 이상주의자. 이상과 신념이 뚜렷함.", "가족 응원 장면"),
-        "INTP": ("서태웅(내면)", "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEilWwpOfOa1wd4eSyLc68ZWDrBLK7jsy4eNcyHXNRgOaWlSt7y7DvaEiBJfMCXtTvrClQUi5a-1lt2ropRe9zaz601ipw9e72G2TTRAP2_i9lMjeW7Bdjk8ZjWhMgePk73AqDczm3J5iZPK/s1600/Slam+Dunk+08_053.jpg", "말은 거의 하지 않지만 내면은 복잡하고 깊은 사고를 하는 선수. 경기 흐름과 위치를 계산하며, 자신의 세계에 몰입하는 스타일입니다.", "“…… (침묵이 가장 많은 말이다)”"),
-        "ESTP": ("강백호(초기)", "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjh7Ana_pDZsNQYqTbavOYktoRCaYah3no1QthWQMvrxsIMl6N8bJj5d6JsUtHyUD7UjnbQlDGjpYNTqi2xu5QbRk6hjfz6eAyTJySEx1HlA4gK3J11noaPRPuPXqZL9TMJLZ8JMz7FUQ3n/s1600/Slam+Dunk+01_059.jpg", "행동파. 충동적이고 즉흥적이며, 분위기를 흔드는 천연 기질.", "“리바운드는 내가 왕이다!”"),
-        "ESFP": ("강백호(연애모드)", "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhRafrPkxp_gZH7UuXELmizEk1PgJ3TdLfl61SLuFypOkEe0hzOHlxBBt4sZVAMNWb5YO072r2f69xCwpcfuNHEr2Lc3bLY0PvpICd1COOmxsQSvJ7ErGRcFxrYiwNUxpO1JmjJ9JOAK9BZ/s1600/Slam+Dunk+08_088.jpg", "유쾌하고 사교적. 모든 상황에 감정적으로 몰입하는 감성 행동형.", "“소연아~!!”"), 
-        "ENTP": ("안 감독", "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg_cnkGF2LSvVcCQE_-B7oTvyICUH9QsIV7qfJfDaug1xZtDnsgF8IbIIhw4ZFzEHHK_2JgtVRsM8QNhIijdY_-fqfyL8_r9h206OWhyphenhyphengNbi2PMpSUJR_tIAr58rTLlLDvfKeB9o_fXVyOz/s1600/Slam+Dunk+01_114.jpg", "유쾌한 조련자. 비판에도 유머로 넘기고 문제해결에 능한 스타일.", "“넌 아직 멀었어.”"),
-        "ESFJ": ("이한나", "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjuI9bEnCDfLrnQ6Zazkv4_OOtfA2JluLSLMpG0XONVS1qP5kX4JkQZvFOX72Q2dwYPIpyfln9y_13_tyUL-I2vOzlvrMgEZxP8N__JR1sg5pGf_ouffwEGyLI_o2N4Aa73bLfkjFbqf4WL/s1600/Slam+Dunk+21_060.jpg", "팀원 하나하나를 아끼고 돌보는 따뜻한 리더십의 조율자.", "“정대만! 그만해!!”"),
-        "ENTJ": ("이정환", "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhDtWRdYoSzH9amQM2c72lfoZ6QtSm_jp08pXbSsg2wjelYOLHo1akUgJo-fCEuNge1OZl_Vx0G39hZFtSJRLi5QPsIV-XEG5TOtxZ0IncbXy56X6srnZFYX3y2C4rdc7xxbHaAq54wLwL7/s1600/Slam+Dunk+09_090.jpg", "경기 흐름을 통제하고, 팀 전체를 이끄는 천부적인 리더. 냉정하고 목표 지향적이며, 결정적인 순간 주저하지 않는 승부사입니다.", "“이 경기는 내가 끝낸다.”")
-    }
 name, img_path, desc, quote = result.get(mbti, ("알 수 없음", "", "결과를 찾을 수 없습니다.", ""))
 
 st.markdown(f"## 당신의 MBTI 유형은: **{mbti} ({name})**")
