@@ -28,7 +28,7 @@ questions = [
     ("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjTM-VhFjwlUDSIBtvIr_xungVRuhEUu_kujAoZ7tX_aw0-zt6Ghb9Bt36Ik_6aH0jkt88PFE5340kzz89_wqtsG6MG6RCFyjCXwVYJn-pFUVznivlZsjt0gPi91-g3Tr6dmNc3CCTKla0v/s1600/Slam+Dunk+13_121.jpg", "중요한 경기 전날?", ["계획 복습", "마음 편히 잠"], ["J", "T"], ["P", "F"]),
     ("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg5R5EfE-c2fW4oLMD3p1Vl7OE_sXWuubYhaXbsoiL8OV7kV5uCYOOi4rEwSe5H3zIsoO_H8gWt_NW4GkZlhHhrRTTiv1KfQPe3AF3OwvqZfZhomiMQSzy0BOxoXHXJmgmlSY-47WnQWi68/s1600/Slam+Dunk+01_062.jpg", "관중석에 누군가 왔다!", ["신경 쓰임", "경기에만 집중"], ["F", "E"], ["T", "I"]),
     ("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi7uPfAlN4_Lbrq8AGFKC0A58TKDRyvpm4101PxPhU1wK0FnyDCiPVkx2nR3kfvs8A1BAfO1WwVmyb5NLLH0EzydIWS7rpm_Hie8AUFNy4D7QitwW9gH5skD8Omz7UyQ3CYocukGXf6LkI2/s1600/Slam+Dunk+09_072.jpg", "이긴 후 당신은?", ["함께 외치며 축하", "속으로 뿌듯"], ["E", "F"], ["I", "T"]),
-    ("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjVFlHJ7xyCm7BYFmirUSW0KO3ZCqlI3mNHWaDvaTbQs5CtNtx8ZhMvT1y_sCHCpUHKKpmyHKRgc3jHEF90Uk2z1sH6t8PZ6CGof7pU4grpWcMcX5sej-nqKOg_mERzmlFqRr_OFFQm87z_/s1600/Slam+Dunk+05_028.jpg", "졌을 때 당신은?", ["다음 각오 다짐", "멍 때리며 감정에 빠짐"], ["N", "J"], ["S", "F"]),
+    ("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjVFlHJ7xyCm7BYFmirUSW0KO3ZCqlI3mNHWaDvaTbQs5CtNtx8ZhMvT1y_sCHCpUHKKpmyHKRgc3jHEF90Uk2z1sH6t8PZ6CGof7pU4grpWcMcX5sej-nqKOg_mERzmlFqRr_OFFQm87z_/s1600/Slam+Dunk+05_028.jpg", "졌을 때 당신은?", ["다음 각오 다짐", "멍 때리며 감정에 빠짐"], ["N", "J"], ["S", "F"])
 ]
 
 
