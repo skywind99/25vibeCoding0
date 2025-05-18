@@ -55,6 +55,13 @@ if st.session_state.page < q_count:
                 st.session_state.score[t] += 1
         st.session_state.page += 1
         st.rerun()
+    else:
+        score = st.session_state.score
+        mbti = ""
+        mbti += "E" if score["E"] >= score["I"] else "I"
+        mbti += "S" if score["S"] >= score["N"] else "N"
+        mbti += "T" if score["T"] >= score["F"] else "F"
+        mbti += "J" if score["J"] >= score["P"] else "P"
 
 result = {
     "ESTJ": [
@@ -148,13 +155,6 @@ result = {
         "“넌 아직 멀었어.”"
     ]
 }
-else:
-    score = st.session_state.score
-    mbti = ""
-    mbti += "E" if score["E"] >= score["I"] else "I"
-    mbti += "S" if score["S"] >= score["N"] else "N"
-    mbti += "T" if score["T"] >= score["F"] else "F"
-    mbti += "J" if score["J"] >= score["P"] else "P"
 
     name, img_path, desc, quote = result.get(mbti, ("알 수 없음", "", "결과 없음", "명대사 없음"))
 
