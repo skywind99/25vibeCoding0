@@ -25,22 +25,32 @@ questions = [
     ("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjVFlHJ7xyCm7BYFmirUSW0KO3ZCqlI3mNHWaDvaTbQs5CtNtx8ZhMvT1y_sCHCpUHKKpmyHKRgc3jHEF90Uk2z1sH6t8PZ6CGof7pU4grpWcMcX5sej-nqKOg_mERzmlFqRr_OFFQm87z_/s1600/Slam+Dunk+05_028.jpg", "졌을 때 당신은?", ["다음 각오 다짐", "멍 때리며 감정에 빠짐"], ["N", "J"], ["S", "F"]),
 ]
 
-for idx, (img, q, options, type_a, type_b) in enumerate(questions, 1):
+
+q_count = len(questions)
+
+if st.session_state.page < q_count:
+    img, q, options, type_a, type_b = questions[st.session_state.page]
+
     if img.startswith("http"):
         st.image(img, use_container_width=True)
     elif os.path.exists(img):
         st.image(img, use_container_width=True)
     else:
-        st.warning(f"이미지가 없습니다: {img}")
-    ans = st.radio(f"**Q{idx}. {q}**", options, key=idx)
-    if ans == options[0]:
-        for t in type_a:
-            score[t] += 1
-    else:
-        for t in type_b:
-            score[t] += 1
+        st.warning(f"이미지를 찾을 수 없습니다: {img}")
 
-if st.button("결과 보기"):
+    ans = st.radio(f"**Q{st.session_state.page + 1}. {q}**", options, key=st.session_state.page)
+    if st.button("다음"):
+        st.session_state.answers.append(ans)
+        if ans == options[0]:
+            for t in type_a:
+                st.session_state.score[t] += 1
+        else:
+            for t in type_b:
+                st.session_state.score[t] += 1
+        st.session_state.page += 1
+        st.experimental_rerun()
+else:
+    score = st.session_state.score
     mbti = ""
     mbti += "E" if score["E"] >= score["I"] else "I"
     mbti += "S" if score["S"] >= score["N"] else "N"
