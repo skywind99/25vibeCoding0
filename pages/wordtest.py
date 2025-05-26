@@ -1,210 +1,162 @@
-def main():
-    st.title("🔬 전국 과학관 정보 및 전시 안내")
-    st.markdown("---")
-    
-    # 1. Load museum and exhibition data early
-    with st.spinner("과학관 목록을 불러오는 중..."): # Changed spinner message for clarity
-        additional_museums = load_additional_museums()
-        all_museums = {**science_museums, **additional_museums}
-    
-    # Load exhibition data ONCE and early
-    # This data is assumed to be primarily from/for the National Science Museum portal
-    with st.spinner("국립중앙과학관 포털 전시 정보를 불러오는 중..."):
-        exhibitions_data_global = get_exhibition_info() 
+import streamlit as st
+import folium
+from streamlit_folium import st_folium
+import requests
+from bs4 import BeautifulSoup
 
-    # 사이드바
-    st.sidebar.title("🗺️ 과학관 선택")
-    
-    national_museums = {k: v for k, v in all_museums.items() if '국립' in k}
-    local_museums = {k: v for k, v in all_museums.items() if '국립' not in k}
-    
-    museum_type = st.sidebar.radio(
-        "과학관 종류:",
-        ["전체", "국립과학관", "지역과학관"],
-        key="museum_type_radio" # Added key for potential state issues
-    )
-    
-    if museum_type == "국립과학관":
-        available_museums = national_museums
-    elif museum_type == "지역과학관":
-        available_museums = local_museums
-    else:
-        available_museums = all_museums
-    
-    # Initialize selected_museum. It can be updated by sidebar or map.
-    # If nothing is selected yet, and available_museums is not empty, pick the first one.
-    default_selection = list(available_museums.keys())[0] if available_museums else None
-    
-    # Use session state to keep track of selected_museum to handle updates from map
-    if 'selected_museum_name' not in st.session_state:
-        st.session_state.selected_museum_name = default_selection
+# 페이지 설정
+st.set_page_config(
+    page_title="과학관 전시 정보",
+    page_icon="🔬",
+    layout="wide"
+)
 
-    # Update selected_museum from sidebar
-    # The selectbox itself will hold the state for the current selection from sidebar
-    selected_museum_sidebar = st.sidebar.selectbox(
-        "과학관을 선택하세요:",
-        list(available_museums.keys()),
-        index=list(available_museums.keys()).index(st.session_state.selected_museum_name) if st.session_state.selected_museum_name in available_museums else 0
-    )
-    # Prioritize sidebar selection if it changes
-    if selected_museum_sidebar != st.session_state.selected_museum_name:
-         st.session_state.selected_museum_name = selected_museum_sidebar
-    
-    st.sidebar.markdown("---")
-    st.sidebar.markdown("### 📊 과학관 현황")
-    st.sidebar.metric("전체 과학관", len(all_museums))
-    st.sidebar.metric("국립과학관", len(national_museums))
-    st.sidebar.metric("지역과학관", len(local_museums))
-    
-    col1, col2 = st.columns([1.2, 0.8])
-    
-    with col1:
-        st.subheader("📍 과학관 위치")
-        map_obj, all_museums_data_for_map = create_map() # Use a different variable name
-        map_data = st_folium(
-            map_obj,
-            width=700,
-            height=500,
-            returned_objects=["last_object_clicked"],
-            key="folium_map" # Added key
-        )
+# 과학관 데이터
+science_museums = {
+    "국립중앙과학관": {
+        "lat": 36.3724,
+        "lon": 127.3755,
+        "address": "대전광역시 유성구 대덕대로 481",
+        "phone": "042-601-7894",
+        "website": "https://www.science.go.kr",
+        "description": "우리나라 최초의 종합과학관으로 자연사관, 과학기술관 등 다양한 전시관 운영"
+    },
+    "국립과천과학관": {
+        "lat": 37.4341,
+        "lon": 126.9964,
+        "address": "경기도 과천시 상하벌로 110",
+        "phone": "02-3677-1500",
+        "website": "https://www.sciencecenter.go.kr",
+        "description": "수도권 대표 과학관으로 첨단기술관, 자연사관, 천체관 등 운영"
+    },
+    "국립부산과학관": {
+        "lat": 35.2273,
+        "lon": 128.9242,
+        "address": "부산광역시 기장군 기장읍 동부산관광로 59",
+        "phone": "051-750-2300",
+        "website": "https://www.sciport.or.kr",
+        "description": "영남권 대표 과학관으로 해양과학, 항공우주 분야 특화 전시 운영"
+    },
+    "국립광주과학관": {
+        "lat": 35.2291,
+        "lon": 126.8438,
+        "address": "광주광역시 북구 첨단과기로 235",
+        "phone": "062-960-6114",
+        "website": "https://www.gsc.go.kr",
+        "description": "호남권 대표 과학관으로 빛과 에너지 분야 특화 전시 운영"
+    }
+}
+
+# 전시 정보 파싱 함수
+def get_exhibition_info():
+    """국립중앙과학관 전시 정보 크롤링"""
+    try:
+        url = "https://smart.science.go.kr/exhibitions/list.action?menuCd=DOM_000000101003001000&contentsSid=47"
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+        }
         
-        st.markdown("""
-        **지도 범례:**
-        - 🔴 국립과학관 (빨간색 마커)
-        - 🔵 지역과학관 (파란색 마커)
-        """)
+        response = requests.get(url, headers=headers, timeout=15)
+        response.raise_for_status()
         
-        if map_data.get('last_object_clicked'):
-            clicked_lat = map_data['last_object_clicked']['lat']
-            clicked_lng = map_data['last_object_clicked']['lng']
-            
-            closest_museum_name_map = None
-            min_distance = float('inf')
-            
-            for name, info_map in all_museums_data_for_map.items():
-                distance = ((info_map['lat'] - clicked_lat) ** 2 + (info_map['lon'] - clicked_lng) ** 2) ** 0.5
-                if distance < min_distance:
-                    min_distance = distance
-                    closest_museum_name_map = name
-            
-            if closest_museum_name_map and min_distance < 0.01: # Threshold for clicking near a marker
-                if st.session_state.selected_museum_name != closest_museum_name_map:
-                    st.session_state.selected_museum_name = closest_museum_name_map
-                    st.experimental_rerun() # Rerun to update sidebar and details panel
-                st.info(f"🗺️ 지도에서 '{st.session_state.selected_museum_name}'이(가) 선택되었습니다!")
-    
-    with col2:
-        st.subheader("🏛️ 과학관 정보")
+        soup = BeautifulSoup(response.content, 'html.parser')
+        exhibitions = []
         
-        current_display_museum = st.session_state.selected_museum_name # Use the state variable
-
-        if current_display_museum and current_display_museum in all_museums:
-            info = all_museums[current_display_museum]
-            
-            museum_category = "🏛️ 국립과학관" if '국립' in current_display_museum else "🏢 지역과학관"
-            
-            st.markdown(f"**{museum_category}**")
-            st.markdown(f"### {current_display_museum}")
-            st.markdown(f"📍 **주소:** {info['address']}")
-            if info['phone']:
-                st.markdown(f"📞 **전화번호:** {info['phone']}")
-            if info.get('description'):
-                st.markdown(f"📝 **설명:** {info['description']}")
-            if info['website']:
-                st.markdown(f'🌐 **홈페이지:** [방문하기]({info["website"]})')
-            
-            Maps_url = f"https://maps.google.com/?q={info['lat']},{info['lon']}" # Corrected Google Maps URL
-            st.markdown(f"🚗 [Google 지도로 길찾기]({Maps_url})")
-            
-            naver_maps_url = f"https://map.naver.com/v5/search/{requests.utils.quote(info['address'])}" # URL Encode address for Naver Maps
-            st.markdown(f"🗺️ [Naver 지도로 보기]({naver_maps_url})")
-
-            # 2. Display relevant exhibitions for the selected museum
-            st.markdown("---")
-            st.markdown(f"##### 🌟 '{current_display_museum}' 관련 가능성 있는 전시 (국립중앙과학관 포털 정보 기반)")
-            
-            relevant_exhibitions_found_for_museum = False
-            if exhibitions_data_global: # Use the globally loaded exhibition data
-                for ex_item in exhibitions_data_global:
-                    is_relevant = False
-                    museum_name_lower = current_display_museum.lower()
-                    # Handle cases like "국립중앙과학관" vs "중앙과학관" for matching
-                    museum_name_simplified = museum_name_lower.replace("국립", "").strip()
-
-
-                    ex_title_lower = ex_item.get('title', "").lower()
-                    ex_desc_lower = ex_item.get('description', "").lower()
-
-                    if museum_name_lower in ex_title_lower or \
-                       museum_name_lower in ex_desc_lower or \
-                       (museum_name_simplified and (museum_name_simplified in ex_title_lower or museum_name_simplified in ex_desc_lower)):
-                        is_relevant = True
+        # ul.bbslist에서 전시 정보 추출
+        bbs_list = soup.find('ul', class_='bbslist')
+        if bbs_list:
+            items = bbs_list.find_all('li')
+            for item in items:
+                try:
+                    # 제목 추출
+                    title_elem = item.find('strong') or item.find('a')
+                    title = title_elem.get_text(strip=True) if title_elem else "제목 없음"
                     
-                    # Special handling for 국립중앙과학관 itself, as most exhibitions are from there
-                    if current_display_museum == "국립중앙과학관" and not is_relevant:
-                         # If no specific mention but selected museum is the source, assume relevance (or list all)
-                         # For now, strict matching. This could be relaxed if desired.
-                         pass
-
-
-                    if is_relevant:
-                        relevant_exhibitions_found_for_museum = True
-                        with st.container():
-                            st.markdown(f"**{ex_item['title']}**")
-                            if ex_item.get('date'):
-                                st.markdown(f"<small>📅 기간: {ex_item['date']}</small>", unsafe_allow_html=True)
-                            if ex_item.get('description'):
-                                st.markdown(f"<small>📝 설명: {ex_item['description']}</small>", unsafe_allow_html=True)
-                            if ex_item.get('link'):
-                                st.markdown(f"<small>[자세히 보기]({ex_item['link']})</small>", unsafe_allow_html=True)
-                            st.markdown("<br>", unsafe_allow_html=True) # Add a little space
-            
-            if not relevant_exhibitions_found_for_museum:
-                st.caption("현재 이 과학관의 이름이 언급된 전시를 국립중앙과학관 포털 목록에서 찾지 못했습니다.")
-            st.markdown("---")
-        else:
-            st.info("사이드바 또는 지도에서 과학관을 선택해주세요.")
-
-    st.markdown("---")
-    
-    # 3. General Exhibition Information Section (from National Science Museum Portal)
-    st.subheader("🎨 국립중앙과학관 포털 제공 전체 전시 목록") 
-    
-    # Button to refresh all cached data (including museums and exhibitions)
-    if st.button("🔄 모든 정보 새로고침 (캐시 지우기)", type="primary", key="refresh_all_data_button"):
-        st.cache_data.clear() # Clears all @st.cache_data functions
-        st.experimental_rerun()
-    
-    if exhibitions_data_global:
-        st.success(f"국립중앙과학관 포털에서 총 {len(exhibitions_data_global)}개의 전시 정보를 찾았습니다.")
+                    # 날짜/기간 추출
+                    date_elem = item.find('span', class_='date') or item.find('em')
+                    date = date_elem.get_text(strip=True) if date_elem else ""
+                    
+                    # 설명 추출
+                    desc_elem = item.find('p') or item.find('div', class_='desc')
+                    description = desc_elem.get_text(strip=True) if desc_elem else ""
+                    
+                    # 링크 추출
+                    link_elem = item.find('a')
+                    link = link_elem.get('href') if link_elem else ""
+                    if link and not link.startswith('http'):
+                        link = "https://smart.science.go.kr" + link
+                    
+                    if title and title != "제목 없음":
+                        exhibitions.append({
+                            'title': title,
+                            'date': date,
+                            'description': description[:100] + "..." if len(description) > 100 else description,
+                            'link': link
+                        })
+                except Exception as e:
+                    continue
         
-        for i, exhibition_item_global in enumerate(exhibitions_data_global):
-            with st.expander(f"📋 {exhibition_item_global['title']}", expanded=(i < 2)): # Expand first 2
-                exp_col1, exp_col2 = st.columns([3,1])
-                with exp_col1:
-                    if exhibition_item_global.get('date'):
-                        st.markdown(f"**📅 기간:** {exhibition_item_global['date']}")
-                    if exhibition_item_global.get('description'):
-                        st.markdown(f"**📝 설명:** {exhibition_item_global['description']}")
-                with exp_col2:
-                    if exhibition_item_global.get('link'):
-                        st.markdown(f"🔗 [자세히 보기]({exhibition_item_global['link']})")
-                # st.markdown("---") # Optional separator inside expander
-    else:
-        st.warning("현재 국립중앙과학관 포털에서 전시 정보를 불러올 수 없습니다. 네트워크 상태를 확인하거나 나중에 다시 시도해주세요.")
-            
-    st.markdown("---")
-    st.markdown(
-        """
-        <div style='text-align: center; color: gray;'>
-            <p>🔬 전국 과학관 정보 서비스 | 
-            <a href='https://smart.science.go.kr' target='_blank'>국립중앙과학관</a> 데이터 기반</p>
-            <p>📡 정보는 주기적으로 캐시될 수 있습니다.</p>
-        </div>
-        """, 
-        unsafe_allow_html=True
+        return exhibitions
+        
+    except Exception as e:
+        return []
+
+def create_map():
+    """과학관 위치가 표시된 지도 생성"""
+    # 대한민국 중심으로 지도 생성
+    m = folium.Map(
+        location=[36.5, 127.5],
+        zoom_start=7,
+        tiles='OpenStreetMap'
     )
+    
+    # 과학관 마커 추가
+    for name, info in science_museums.items():
+        icon_color = 'red' if '국립' in name else 'blue'
+        
+        popup_html = f"""
+        <div style="width: 250px;">
+            <h4>{name}</h4>
+            <p><strong>주소:</strong> {info['address']}</p>
+            {f"<p><strong>전화:</strong> {info['phone']}</p>" if info['phone'] else ""}
+            {f"<p><strong>설명:</strong> {info['description']}</p>" if info.get('description') else ""}
+            {f'<p><a href="{info["website"]}" target="_blank">홈페이지 방문</a></p>' if info['website'] else ""}
+        </div>
+        """
+        
+        folium.Marker(
+            location=[info['lat'], info['lon']],
+            popup=folium.Popup(popup_html, max_width=300),
+            tooltip=name,
+            icon=folium.Icon(color=icon_color, icon='flask', prefix='fa')
+        ).add_to(m)
+    
+    return m
+
+def main():
+    st.title("🔬 과학관 전시 정보")
+    st.markdown("---")
+    
+    # 과학관 지도 생성
+    map_obj = create_map()
+    
+    # 과학관 마커 클릭 시 전시 정보 표시
+    st_folium(map_obj, width=700, height=500)
+    
+    # 전시 정보 로딩
+    exhibitions = get_exhibition_info()
+    
+    st.subheader("🎨 현재 전시 정보")
+    if exhibitions:
+        st.success(f"총 {len(exhibitions)}개의 전시 정보를 찾았습니다.")
+        for exhibition in exhibitions:
+            st.expander(f"📋 {exhibition['title']}", expanded=True):
+                st.markdown(f"**📅 기간:** {exhibition['date']}")
+                st.markdown(f"**📝 설명:** {exhibition['description']}")
+                if exhibition['link']:
+                    st.markdown(f"[자세히 보기]({exhibition['link']})")
+    else:
+        st.warning("현재 전시 정보를 불러올 수 없습니다. 나중에 다시 시도해주세요.")
 
 if __name__ == "__main__":
     main()
