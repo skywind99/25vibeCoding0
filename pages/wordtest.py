@@ -16,15 +16,10 @@ if 'mode' not in st.session_state:
 
 st.title("📸 사진으로 만드는 단어장 & 테스트")
 
-# 사용자 기기에 따라 입력 방식 결정
-is_mobile = st.user_agent and st.user_agent.platform in ['android', 'ios']
+st.markdown("### 📤 이미지를 업로드하거나 📸 사진을 찍어주세요")
+img_file = st.camera_input("카메라로 촬영하기 (모바일)") or \
+            st.file_uploader("또는 이미지를 업로드하세요 (jpg/png)", type=["jpg", "jpeg", "png"])
 
-# 📷 사진 업로드 또는 촬영
-img_file = None
-if is_mobile:
-    img_file = st.camera_input("사진을 찍으세요") or st.file_uploader("또는 이미지를 업로드하세요", type=["jpg", "jpeg", "png"])
-else:
-    img_file = st.file_uploader("PC에서는 이미지만 업로드 가능합니다", type=["jpg", "jpeg", "png"])
 
 # ✅ OCR + 단어장 추출
 if img_file:
