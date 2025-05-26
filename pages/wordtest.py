@@ -1,12 +1,8 @@
 import streamlit as st
-import cv2
-import pytesseract
 from PIL import Image
+import pytesseract
 import pandas as pd
-import io
-
-# OCR 설정
-pytesseract.pytesseract.tesseract_cmd = '/usr/bin/tesseract'  # Windows는 tesseract 설치 경로로 수정
+import platform
 
 # 세션 상태 초기화
 if 'words' not in st.session_state:
@@ -20,19 +16,26 @@ if 'mode' not in st.session_state:
 
 st.title("📸 사진으로 만드는 단어장 & 테스트")
 
-# 1. 사진 업로드 or 카메라 촬영
-img_file = st.camera_input("사진을 찍거나 이미지를 업로드하세요") or st.file_uploader("또는 이미지를 업로드하세요", type=["jpg", "jpeg", "png"])
+# 사용자 기기에 따라 입력 방식 결정
+is_mobile = st.user_agent and st.user_agent.platform in ['android', 'ios']
 
+# 📷 사진 업로드 또는 촬영
+img_file = None
+if is_mobile:
+    img_file = st.camera_input("사진을 찍으세요") or st.file_uploader("또는 이미지를 업로드하세요", type=["jpg", "jpeg", "png"])
+else:
+    img_file = st.file_uploader("PC에서는 이미지만 업로드 가능합니다", type=["jpg", "jpeg", "png"])
+
+# ✅ OCR + 단어장 추출
 if img_file:
     image = Image.open(img_file)
     st.image(image, caption="업로드된 이미지", use_column_width=True)
 
-    # 2. OCR로 텍스트 추출
     text = pytesseract.image_to_string(image, lang='eng+kor')
     st.subheader("추출된 텍스트")
     st.text(text)
 
-    # 3. 단어와 뜻 구분 (기본적으로 "단어 - 뜻" 형식이라고 가정)
+    # 단어-뜻 분리
     lines = [line.strip() for line in text.split('\n') if '-' in line]
     word_list = []
     for line in lines:
@@ -43,30 +46,29 @@ if img_file:
             continue
 
     if word_list:
-        # 단어장
         st.session_state.words = word_list
         df = pd.DataFrame(word_list)
         st.subheader("단어장")
         st.dataframe(df)
 
-        # 4. 복습 퀴즈 (단어 숨기기)
+        # 단어 숨기고 보기
         if st.checkbox("단어 숨기고 뜻 보고 맞춰보기"):
             for index, row in df.iterrows():
                 with st.expander(f"뜻: {row['뜻']}"):
                     st.markdown(f"**단어:** ||{row['단어']}||")
 
-        # 5. 다운로드 기능
+        # 다운로드
         csv = df.to_csv(index=False).encode('utf-8-sig')
         st.download_button("단어장 CSV로 저장", csv, "vocab_list.csv", "text/csv")
 
-# 단어 테스트 모드
+# 테스트 시작 버튼
 if st.session_state.mode == 'list' and st.session_state.words:
-    if st.button("테스트 시작"):
+    if st.button("📝 테스트 시작"):
         st.session_state.mode = 'quiz'
         st.session_state.current_index = 0
         st.session_state.answers = []
 
-# 퀴즈 모드
+# 테스트 모드
 elif st.session_state.mode == 'quiz':
     if st.session_state.current_index < len(st.session_state.words):
         index = st.session_state.current_index
