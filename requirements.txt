@@ -1,9 +1,5 @@
 streamlit
-pytesseract
+easyocr
 Pillow
 pandas
-google-generativeai>=0.4.0
-plotly
-folium
-koreanize_matplotlib
-openai
+numpy
