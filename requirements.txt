@@ -3,7 +3,6 @@ folium
 koreanize_matplotlib
 openai
 streamlit
-cv2
 PIL
 opencv-python-headless
 Pillow
