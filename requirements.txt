@@ -1,10 +1,9 @@
-plotly 
+streamlit
+pytesseract
+Pillow
+pandas
+google-generativeai>=0.4.0
+plotly
 folium
 koreanize_matplotlib
 openai
-streamlit
-Pillow
-opencv-python
-pandas
-pytesseract
-google-generativeai>=0.4.0
