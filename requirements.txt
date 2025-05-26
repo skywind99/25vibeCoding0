@@ -5,5 +5,8 @@ openai
 streamlit
 cv2
 PIL
+opencv-python-headless
+Pillow
+pandas
 pytesseract
 google-generativeai>=0.4.0
